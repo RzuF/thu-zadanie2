@@ -66,19 +66,19 @@ class DesignPattern {
         }
 
         @Override
-        public BuildOrExpand setCode(String code) {
+        public WithOptional setCode(String code) {
             this.code = code;
             return this;
         }
 
         @Override
-        public BuildOrExpand setDescription(String description) {
+        public WithOptional setDescription(String description) {
             this.description = description;
             return this;
         }
 
         @Override
-        public BuildOrExpand setExample(String example) {
+        public WithOptional setExample(String example) {
             this.example = example;
             return this;
         }
@@ -89,7 +89,7 @@ class DesignPattern {
         }
     }
 
-    interface BuildingDesignPattern extends WithName, WithType, WithCode, BuildOrExpand {}
+    interface BuildingDesignPattern extends WithName, WithType, WithCode, WithOptional {}
 
     interface WithName {
         WithType name(String name);
@@ -100,12 +100,15 @@ class DesignPattern {
     }
 
     interface WithCode {
-        BuildOrExpand code(String code);
+        WithOptional code(String code);
     }
 
-    interface BuildOrExpand {
+    interface WithOptional extends Build {
+        WithOptional description(String description);
+        WithOptional example(String example);
+    }
+
+    interface Build {
         DesignPattern build();
-        BuildOrExpand description(String description);
-        BuildOrExpand example(String example);
     }
 }
