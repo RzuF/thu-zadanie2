@@ -92,20 +92,20 @@ class DesignPattern {
     interface BuildingDesignPattern extends WithName, WithType, WithCode, WithOptional {}
 
     interface WithName {
-        WithType name(String name);
+        WithType setName(String name);
     }
 
     interface WithType {
-        WithCode type(DesignPattern.Type type);
+        WithCode setType(DesignPattern.Type type);
     }
 
     interface WithCode {
-        WithOptional code(String code);
+        WithOptional setCode(String code);
     }
 
     interface WithOptional extends Build {
-        WithOptional description(String description);
-        WithOptional example(String example);
+        WithOptional setDescription(String description);
+        WithOptional setExample(String example);
     }
 
     interface Build {
