@@ -1,34 +1,19 @@
 package edu.agh.wfiis.designpatterns.patternsUsageExample;
 
-public class DesignPatternFactory {
+public abstract class DesignPatternFactory {
 
     public DesignPattern create(PatternName patternName) {
         switch (patternName) {
             case BUILDER: {
-                DesignPattern pattern = DesignPattern.getBuilder()
-                                            .setName("builder")
-                                            .setType(DesignPattern.Type.CREATIONAL)
-                                            .setCode("Some builder code")
-                                            .setDescription("builder pattern")
-                                            .build();                
+                DesignPattern pattern = createBuilder();
                 return pattern;
             }
             case DECORATOR: {
-                DesignPattern pattern = DesignPattern.getBuilder()
-                                            .setName("decorator")
-                                            .setType(DesignPattern.Type.CREATIONAL)
-                                            .setCode("Some decorator code")
-                                            .setDescription("decorator pattern")
-                                            .build(); 
+                DesignPattern pattern = createDecorator();
                 return pattern;
             }
             case STRATEGY: {                
-                DesignPattern pattern = DesignPattern.getBuilder()
-                                            .setName("strategy")
-                                            .setType(DesignPattern.Type.BEHAVIORAL)
-                                            .setCode("Some strategy code")
-                                            .setDescription("strategy pattern")
-                                            .build(); 
+                DesignPattern pattern = createStrategy(); 
                 return pattern;
             }
             default: {
@@ -44,5 +29,37 @@ public class DesignPatternFactory {
 
     enum PatternName {
         BUILDER, DECORATOR, STRATEGY;
+    }
+
+    protected abstract String getPatternCode();
+
+    private createBuilder() {
+        return DesignPattern.getBuilder()
+                            .setName("builder")
+                            .setType(DesignPattern.Type.CREATIONAL)
+                            .setCode("Some builder code")
+                            .setPatternCode(getPatternCode())
+                            .setDescription("builder pattern")
+                            .build();
+    }
+
+    private createStrategy() {
+        return DesignPattern.getBuilder()
+                            .setName("strategy")
+                            .setType(DesignPattern.Type.BEHAVIORAL)
+                            .setCode("Some strategy code")
+                            .setPatternCode(getPatternCode())
+                            .setDescription("strategy pattern")
+                            .build(); 
+    }
+
+    private createDecorator() {
+        return DesignPattern.getBuilder()
+                            .setName("decorator")
+                            .setType(DesignPattern.Type.CREATIONAL)
+                            .setCode("Some decorator code")
+                            .setPatternCode(getPatternCode())
+                            .setDescription("decorator pattern")
+                            .build();
     }
 }
