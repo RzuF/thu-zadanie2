@@ -33,7 +33,7 @@ public abstract class DesignPatternFactory {
 
     protected abstract String getPatternCode();
 
-    private createBuilder() {
+    private DesignPattern createBuilder() {
         return DesignPattern.getBuilder()
                             .setName("builder")
                             .setType(DesignPattern.Type.CREATIONAL)
@@ -43,7 +43,7 @@ public abstract class DesignPatternFactory {
                             .build();
     }
 
-    private createStrategy() {
+    private DesignPattern createStrategy() {
         return DesignPattern.getBuilder()
                             .setName("strategy")
                             .setType(DesignPattern.Type.BEHAVIORAL)
@@ -53,7 +53,7 @@ public abstract class DesignPatternFactory {
                             .build(); 
     }
 
-    private createDecorator() {
+    private DesignPattern createDecorator() {
         return DesignPattern.getBuilder()
                             .setName("decorator")
                             .setType(DesignPattern.Type.CREATIONAL)
