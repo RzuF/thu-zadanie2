@@ -2,10 +2,11 @@ package edu.agh.wfiis.designpatterns.patternsUsageExample;
 
 class DesignPattern {
     private final String name;
+    private final DesignPattern.Type type;
+    private final String code;
     private final String patternCode;
     private final String description;
     private final String example;
-    private final DesignPattern.Type type;
 
     public enum Type {
         UNDEFINED,
@@ -37,11 +38,13 @@ class DesignPattern {
             String name,
             String type,
             String code,
+            String patternCode,
             String description,
             String example) {
         this.name = name;
         this.type = type;
         this.code = code;
+        this.patternCode = patternCode;
         this.description = description;
         this.example = example;
     }
@@ -50,6 +53,7 @@ class DesignPattern {
         private String name;
         private DesignPattern.Type type;
         private String code;
+        private String patternCode;
         private String description;
         private String example;
 
@@ -66,9 +70,14 @@ class DesignPattern {
         }
 
         @Override
-        public WithOptional setCode(String code) {
+        public WithPatternCode setCode(String code) {
             this.code = code;
             return this;
+        }
+
+        @Override
+        public WithOptional setPatternCode(String patternCode) {
+            this.patternCode = patternCode;
         }
 
         @Override
@@ -85,11 +94,11 @@ class DesignPattern {
 
         @Override
         public DesignPattern build() {
-            return new DesignPattern(name, type, code, description, example);
+            return new DesignPattern(name, type, code, patternCode, description, example);
         }
     }
 
-    interface BuildingDesignPattern extends WithName, WithType, WithCode, WithOptional {}
+    interface BuildingDesignPattern extends WithName, WithType, WithCode, WithPatternCode, WithOptional {}
 
     interface WithName {
         WithType setName(String name);
@@ -100,7 +109,11 @@ class DesignPattern {
     }
 
     interface WithCode {
-        WithOptional setCode(String code);
+        WithPatternCode setCode(String code);
+    }
+
+    interface WithPatternCode {
+        WithOptional setPatternCode();
     }
 
     interface WithOptional extends Build {
